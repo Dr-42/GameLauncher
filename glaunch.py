@@ -63,6 +63,10 @@ def onselect(evt):
     get_image(value)
 
 if __name__ == "__main__":
+    
+
+
+    #Create the UI
     img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
     lb = tk.Listbox(root, selectmode=tk.SINGLE)
     for game in games:
