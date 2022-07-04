@@ -9,6 +9,9 @@ def on_closing():
     win.destroy()
     win.quit()
 
+def on_pop_close():
+    pop.destroy()
+
 # Create a button to launch the selected game
 def launch_game():
     game = lb.get(lb.curselection())
@@ -48,10 +51,19 @@ def onselect(evt):
     get_image(value)
 
 def options():
-    pass
+    global pop
+    pop = tk.Toplevel(win)
+    pop.title("glaunch.pyConfirmation")
+    pop.geometry("300x150")
+
+    frpop = tk.Frame(pop)
+    butn = tk.Button(frpop, text="Close", command=on_pop_close)
+    butn.grid(row=0, column=0)
+    frpop.pack()
+
 
 if __name__ == "__main__":
-    
+
     dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
     data = json.loads(dat)
 
