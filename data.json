@@ -1,0 +1,9 @@
+{
+    "Hollow Knight": ["/home/spandan/.wine/drive_c/Hollow Knight", "hollow_knight.exe", "hollow_knight.png"],
+    "Dead Cells": ["/home/spandan/.wine/drive_c/Dead Cells/" , "deadcells.exe", "dead_cells.png"],
+    "Cuphead": ["/home/spandan/.wine/drive_c/Cuphead The Delicious Last Course/", "Cuphead.exe", "cuphead.png"],
+    "Outer Wilds": ["/home/spandan/.wine/drive_c/Outer Wilds" , "OuterWilds.exe", "outer_wilds.png"],
+    "Road Redemption": ["/home/spandan/.wine/drive_c/Road Redemption" , "RoadRedemption.exe", "road_redemption.png"],
+    "Dark Souls": ["/home/spandan/.wine/drive_c/Dark Souls" , "DARKSOULS.exe", "dark_souls.png"],
+    "Celeste": ["/home/spandan/.wine/drive_c/Celeste/Celeste.v1.4.0.0/", "Celeste.exe", "celeste.png"]
+}

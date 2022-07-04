@@ -2,21 +2,11 @@
 import tkinter as tk
 import os
 from tkinter import ttk
+import json
 
 # Create a window
 root = tk.Tk()
 root.title("Game Launcher")
-
-# Dictionary of games with their paths
-games = {
-        "Hollow Knight": ("/home/spandan/.wine/drive_c/Hollow Knight", "hollow_knight.exe", "hollow_knight.png"),
-        "Dead Cells": ("/home/spandan/.wine/drive_c/Dead Cells/" , "deadcells.exe", "dead_cells.png"),
-        "Cuphead": ("/home/spandan/.wine/drive_c/Cuphead The Delicious Last Course/", "Cuphead.exe", "cuphead.png"),
-        "Outer Wilds": ("/home/spandan/.wine/drive_c/Outer Wilds" , "OuterWilds.exe", "outer_wilds.png"),
-        "Road Redemption": ("/home/spandan/.wine/drive_c/Road Redemption" , "RoadRedemption.exe", "road_redemption.png"),
-        "Dark Souls": ("/home/spandan/.wine/drive_c/Dark Souls" , "DARKSOULS.exe", "dark_souls.png"),
-        "Celeste": ("/home/spandan/.wine/drive_c/Celeste/Celeste.v1.4.0.0/", "Celeste.exe", "celeste.png")
-        }
 
 
 # Handle cleanup
@@ -27,8 +17,8 @@ def on_closing():
 # Create a button to launch the selected game
 def launch_game():
     game = lb.get(lb.curselection())
-    game_path = games[game][0]
-    game_exe = games[game][1]
+    game_path = data[game][0]
+    game_exe = data[game][1]
     os.chdir(game_path)
 
     if(game_exe == "hollow_knight.exe"):
@@ -50,7 +40,7 @@ def keyboard_controls():
     root.bind('<Escape>', lambda event: on_closing())
 
 def get_image(key):
-    imgPath = "/run/media/spandan/Projects/Python/GameLauncher/images/" + games[key][2]
+    imgPath = "/run/media/spandan/Projects/Python/GameLauncher/images/" + data[key][2]
     imgN = tk.PhotoImage(file=imgPath)
     imgBox.configure(image=imgN)
     imgBox.image = imgN
@@ -64,12 +54,14 @@ def onselect(evt):
 
 if __name__ == "__main__":
     
+    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
+    data = json.loads(dat)
 
 
     #Create the UI
     img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
     lb = tk.Listbox(root, selectmode=tk.SINGLE)
-    for game in games:
+    for game in data:
         lb.insert(tk.END, game)
 
     lb.bind('<<ListboxSelect>>', onselect)
