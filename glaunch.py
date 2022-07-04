@@ -38,6 +38,7 @@ def keyboard_controls():
     root.bind('<Escape>', lambda event: on_closing())
 
 def get_image(key):
+    global imgN
     imgPath = "/run/media/spandan/Projects/Python/GameLauncher/images/" + data[key][2]
     imgN = tk.PhotoImage(file=imgPath)
     imgBox.configure(image=imgN)
@@ -54,7 +55,6 @@ def options():
     global pop
     pop = tk.Toplevel(win)
     pop.title("glaunch.pyConfirmation")
-    pop.geometry("300x150")
 
     frpop = tk.Frame(pop)
     butn = tk.Button(frpop, text="Close", command=on_pop_close)
@@ -62,24 +62,19 @@ def options():
     frpop.pack()
 
 
-if __name__ == "__main__":
-
-    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
-    data = json.loads(dat)
-
-
+def create_ui():
+    global win, root, img, lb, imgBox
     #Create the UI
     win = tk.Tk()
     win.title("Game Launcher")
     root = tk.Frame(win)
 
-    img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
     head = tk.Label(root, text="Library")
     opt = tk.Button(root, text= "≡", command=options)
     head.grid(row=0, column=0, columnspan=2, sticky='w')
     opt.grid(row=0, column=2, sticky="e")
 
-    lb = tk.Listbox(root, selectmode=tk.SINGLE)
+    lb = tk.Listbox(root, selectmode=tk.SINGLE, height=9)
     for game in data:
         lb.insert(tk.END, game)
 
@@ -92,15 +87,22 @@ if __name__ == "__main__":
     strt.grid(row=2, column=0, columnspan=2, sticky="ew")
     qut.grid(row=2, column=2, sticky="ew")
 
+    img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
     imgBox = tk.Label(root, image=img)
-    imgBox.grid(row=0, column=4, rowspan=2)
+    imgBox.grid(row=0, column=3, rowspan=3, sticky="ewns")
 
     root.pack(expand=True)
 
+def load_data():
+    global data
+    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
+    data = json.loads(dat)
+ 
+if __name__ == "__main__":
+    load_data()
+    create_ui()
     keyboard_controls()
     # Start the main loop
     root.mainloop()
     root.destroy()
     root.quit()
-
-
