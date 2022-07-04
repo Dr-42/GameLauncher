@@ -4,15 +4,10 @@ import os
 from tkinter import ttk
 import json
 
-# Create a window
-root = tk.Tk()
-root.title("Game Launcher")
-
-
 # Handle cleanup
 def on_closing():
-    root.destroy()
-    root.quit()
+    win.destroy()
+    win.quit()
 
 # Create a button to launch the selected game
 def launch_game():
@@ -52,6 +47,9 @@ def onselect(evt):
     value = w.get(index)
     get_image(value)
 
+def options():
+    pass
+
 if __name__ == "__main__":
     
     dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
@@ -59,22 +57,33 @@ if __name__ == "__main__":
 
 
     #Create the UI
+    win = tk.Tk()
+    win.title("Game Launcher")
+    root = tk.Frame(win)
+
     img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
+    head = tk.Label(root, text="Library")
+    opt = tk.Button(root, text= "≡", command=options)
+    head.grid(row=0, column=0, columnspan=2, sticky='w')
+    opt.grid(row=0, column=2, sticky="e")
+
     lb = tk.Listbox(root, selectmode=tk.SINGLE)
     for game in data:
         lb.insert(tk.END, game)
 
     lb.bind('<<ListboxSelect>>', onselect)
-    lb.grid(row= 0, column= 0, columnspan=2)
+    lb.grid(row= 1, column= 0, columnspan=3)
 
     strt = tk.Button(root, text= "Launch", command=launch_game)
-    root.protocol("WM_DELETE_WINDOW", on_closing)
+    win.protocol("WM_DELETE_WINDOW", on_closing)
     qut = tk.Button(root, text= "Quit", command=on_closing)
-    strt.grid(row=1, column=0)
-    qut.grid(row=1, column=1)
+    strt.grid(row=2, column=0, columnspan=2, sticky="ew")
+    qut.grid(row=2, column=2, sticky="ew")
 
     imgBox = tk.Label(root, image=img)
-    imgBox.grid(row=0, column=2, rowspan=2)
+    imgBox.grid(row=0, column=4, rowspan=2)
+
+    root.pack(expand=True)
 
     keyboard_controls()
     # Start the main loop
