@@ -1,9 +1,42 @@
 {
-    "Hollow Knight": ["/home/spandan/.wine/drive_c/Hollow Knight", "hollow_knight.exe", "hollow_knight.png"],
-    "Dead Cells": ["/home/spandan/.wine/drive_c/Dead Cells/" , "deadcells.exe", "dead_cells.png"],
-    "Cuphead": ["/home/spandan/.wine/drive_c/Cuphead The Delicious Last Course/", "Cuphead.exe", "cuphead.png"],
-    "Outer Wilds": ["/home/spandan/.wine/drive_c/Outer Wilds" , "OuterWilds.exe", "outer_wilds.png"],
-    "Road Redemption": ["/home/spandan/.wine/drive_c/Road Redemption" , "RoadRedemption.exe", "road_redemption.png"],
-    "Dark Souls": ["/home/spandan/.wine/drive_c/Dark Souls" , "DARKSOULS.exe", "dark_souls.png"],
-    "Celeste": ["/home/spandan/.wine/drive_c/Celeste/Celeste.v1.4.0.0/", "Celeste.exe", "celeste.png"]
+    "Hollow Knight": [
+        "/home/spandan/.wine/drive_c/Hollow Knight",
+        "/home/spandan/.wine/drive_c/Hollow Knight/hollow_knight.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png"
+    ],
+    "Cuphead": [
+        "/home/spandan/.wine/drive_c/Cuphead The Delicious Last Course",
+        "/home/spandan/.wine/drive_c/Cuphead The Delicious Last Course/Cuphead.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/cuphead.png"
+    ],
+    "Dark Souls": [
+        "/home/spandan/.wine/drive_c/Dark Souls",
+        "/home/spandan/.wine/drive_c/Dark Souls/DARKSOULS.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/dark_souls.png"
+    ],
+    "Celeste": [
+        "/home/spandan/.wine/drive_c/Celeste/Celeste.v1.4.0.0",
+        "/home/spandan/.wine/drive_c/Celeste/Celeste.v1.4.0.0/Celeste.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/celeste.png"
+    ],
+    "Dead Cells": [
+        "/home/spandan/.wine/drive_c/Dead Cells",
+        "/home/spandan/.wine/drive_c/Dead Cells/deadcells.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/dead_cells.png"
+    ],
+    "Outer Wilds": [
+        "/home/spandan/.wine/drive_c/Outer Wilds",
+        "/home/spandan/.wine/drive_c/Outer Wilds/OuterWilds.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/outer_wilds.png"
+    ],
+    "Road Redemption": [
+        "/home/spandan/.wine/drive_c/Road Redemption",
+        "/home/spandan/.wine/drive_c/Road Redemption/RoadRedemption.exe",
+        "/run/media/spandan/Projects/Python/GameLauncher/images/road_redemption.png"
+    ],
+    "": [
+        "",
+        "",
+        ""
+    ]
 }

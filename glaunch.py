@@ -21,7 +21,7 @@ def launch_game():
     else:
         wineprefix = "WINEPREFIX=/home/spandan/GZN"
 
-    command = wineprefix + " prime-run wine " + game_exe
+    command = wineprefix + " prime-run wine \"" + game_exe + "\""
     print(command)
     # Launch the game
     os.system(command)
@@ -36,7 +36,7 @@ def keyboard_controls():
 
 def get_image(key):
     global imgN
-    imgPath = "/run/media/spandan/Projects/Python/GameLauncher/images/" + data[key][2]
+    imgPath = data[key][2] 
     imgN = tk.PhotoImage(file=imgPath)
     imgBox.configure(image=imgN)
     imgBox.image = imgN
@@ -49,21 +49,38 @@ def onselect(evt):
     get_image(value)
 
 def open_game_dir(dir_field):
-    dir_path_string = filedialog.askdirectory()
+    dir_path_string = filedialog.askdirectory(initialdir= "/home/spandan/.wine/drive_c")
     dir_field.delete('1.0', tk.END)
     dir_field.insert('1.0', dir_path_string)
 
 def open_game_exe(exe_field):
-    file_path_string = filedialog.askopenfilename()
+    file_path_string = filedialog.askopenfilename(initialdir= "/home/spandan/.wine/drive_c", filetypes=[('EXE', '*.exe')])
     exe_field.delete('1.0', tk.END)
     exe_field.insert('1.0', file_path_string)
 
-def save_game():
-    pass
+def open_game_image(img_field):
+    file_path_string = filedialog.askopenfilename(initialdir= "/run/media/spandan/Projects/Python/GameLauncher/images", filetypes=[('PNG', '*.png')])
+    img_field.delete('1.0', tk.END)
+    img_field.insert('1.0', file_path_string)
+
+def save_game(name_field, dir_field, exe_field, img_field):
+    name = name_field.get("1.0", tk.END)[:-1] 
+    direc = dir_field.get("1.0", tk.END)[:-1] 
+    exe = exe_field.get("1.0", tk.END)[:-1] 
+    img = img_field.get("1.0", tk.END)[:-1] 
+
+    data[name] = (direc, exe, img)
+    lb.delete(0, tk.END)
+    for game in data:
+        lb.insert(tk.END, game)
+
+    with open("data.json", 'w') as json_file:
+        json.dump(data, json_file, indent=4, separators=(',',': '))
+
+    quit_pop()
 
 def quit_pop():
     pop.destroy()
-    pass
 
 def options():
     global pop
@@ -74,12 +91,17 @@ def options():
     p_name = tk.Label(frpop, text="Name: ")
     p_dir = tk.Label(frpop, text="Dir: ")
     p_exe = tk.Label(frpop, text="Exe: ")
+    p_img = tk.Label(frpop, text="Image: ")
+
     p_namefield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
     p_dirfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
     p_exefield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
+    p_imgfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
+
     p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_dir(p_dirfield))
     p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_exe(p_exefield))
-    p_saveButton = tk.Button(frpop, text="Save", command=save_game)
+    p_imgButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_image(p_imgfield))
+    p_saveButton = tk.Button(frpop, text="Save", command=lambda: save_game(p_namefield, p_dirfield, p_exefield, p_imgfield))
     p_quitButton = tk.Button(frpop, text="Quit", command=quit_pop)
 
     p_name.grid(row=0, column=0)
@@ -90,8 +112,11 @@ def options():
     p_exe.grid(row=2, column=0)
     p_exefield.grid(row=2, column=1, columnspan=2)
     p_exeButton.grid(row=2, column=3)
-    p_saveButton.grid(row=3, column=1)
-    p_quitButton.grid(row=3, column=2)
+    p_img.grid(row=3, column=0)
+    p_imgfield.grid(row=3, column=1, columnspan=2)
+    p_imgButton.grid(row=3, column=3)
+    p_saveButton.grid(row=4, column=1)
+    p_quitButton.grid(row=4, column=2)
 
     frpop.pack()
 
@@ -108,11 +133,17 @@ def create_ui():
     head.grid(row=0, column=0, columnspan=2, sticky='w')
     opt.grid(row=0, column=2, sticky="e")
 
+    img = tk.PhotoImage()
+    imgBox = tk.Label(root, image=img)
+    imgBox.grid(row=0, column=3, rowspan=3, sticky="ewns")
+
     lb = tk.Listbox(root, selectmode=tk.SINGLE, height=9)
     for game in data:
         lb.insert(tk.END, game)
 
     lb.bind('<<ListboxSelect>>', onselect)
+    lb.select_set(0)
+    lb.event_generate("<<ListboxSelect>>")
     lb.grid(row= 1, column= 0, columnspan=3)
 
     strt = tk.Button(root, text= "Launch", command=launch_game)
@@ -120,10 +151,6 @@ def create_ui():
     qut = tk.Button(root, text= "Quit", command=on_closing)
     strt.grid(row=2, column=0, columnspan=2, sticky="ew")
     qut.grid(row=2, column=2, sticky="ew")
-
-    img = tk.PhotoImage(file = "/run/media/spandan/Projects/Python/GameLauncher/images/hollow_knight.png")
-    imgBox = tk.Label(root, image=img)
-    imgBox.grid(row=0, column=3, rowspan=3, sticky="ewns")
 
     root.pack(expand=True)
 
