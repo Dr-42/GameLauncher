@@ -44,9 +44,10 @@ def get_image(key):
 def onselect(evt):
     # Note here that Tkinter passes an event object to onselect()
     w = evt.widget
-    index = int(w.curselection()[0])
-    value = w.get(index)
-    get_image(value)
+    if w.curselection() != ():
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        get_image(value)
 
 def open_game_dir(dir_field):
     dir_path_string = filedialog.askdirectory(initialdir= "/home/spandan/.wine/drive_c")
@@ -74,7 +75,7 @@ def save_game(name_field, dir_field, exe_field, img_field):
     for game in data:
         lb.insert(tk.END, game)
 
-    with open("data.json", 'w') as json_file:
+    with open("/run/media/spandan/Projects/Python/GameLauncher/data.json", 'w') as json_file:
         json.dump(data, json_file, indent=4, separators=(',',': '))
 
     quit_pop()
