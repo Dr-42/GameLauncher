@@ -1,16 +1,13 @@
 # Simple gui for launching games using shell commands
 import tkinter as tk
 import os
-from tkinter import ttk
+from tkinter import ttk, filedialog
 import json
 
 # Handle cleanup
 def on_closing():
     win.destroy()
     win.quit()
-
-def on_pop_close():
-    pop.destroy()
 
 # Create a button to launch the selected game
 def launch_game():
@@ -51,14 +48,51 @@ def onselect(evt):
     value = w.get(index)
     get_image(value)
 
+def open_game_dir(dir_field):
+    dir_path_string = filedialog.askdirectory()
+    dir_field.delete('1.0', tk.END)
+    dir_field.insert('1.0', dir_path_string)
+
+def open_game_exe(exe_field):
+    file_path_string = filedialog.askopenfilename()
+    exe_field.delete('1.0', tk.END)
+    exe_field.insert('1.0', file_path_string)
+
+def save_game():
+    pass
+
+def quit_pop():
+    pop.destroy()
+    pass
+
 def options():
     global pop
     pop = tk.Toplevel(win)
-    pop.title("glaunch.pyConfirmation")
+    pop.title("Save Game")
 
     frpop = tk.Frame(pop)
-    butn = tk.Button(frpop, text="Close", command=on_pop_close)
-    butn.grid(row=0, column=0)
+    p_name = tk.Label(frpop, text="Name: ")
+    p_dir = tk.Label(frpop, text="Dir: ")
+    p_exe = tk.Label(frpop, text="Exe: ")
+    p_namefield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
+    p_dirfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
+    p_exefield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
+    p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_dir(p_dirfield))
+    p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_exe(p_exefield))
+    p_saveButton = tk.Button(frpop, text="Save", command=save_game)
+    p_quitButton = tk.Button(frpop, text="Quit", command=quit_pop)
+
+    p_name.grid(row=0, column=0)
+    p_namefield.grid(row=0, column=1, columnspan=2)
+    p_dir.grid(row=1, column=0)
+    p_dirfield.grid(row=1, column=1, columnspan=2)
+    p_dirButton.grid(row=1, column=3)
+    p_exe.grid(row=2, column=0)
+    p_exefield.grid(row=2, column=1, columnspan=2)
+    p_exeButton.grid(row=2, column=3)
+    p_saveButton.grid(row=3, column=1)
+    p_quitButton.grid(row=3, column=2)
+
     frpop.pack()
 
 
@@ -104,5 +138,3 @@ if __name__ == "__main__":
     keyboard_controls()
     # Start the main loop
     root.mainloop()
-    root.destroy()
-    root.quit()
