@@ -16,7 +16,7 @@ def launch_game():
     game_exe = data[game][1]
     os.chdir(game_path)
 
-    if(game_exe == "hollow_knight.exe"):
+    if(game == "Hollow Knight"):
         wineprefix = "WINEPREFIX=/home/spandan/HK"
     else:
         wineprefix = "WINEPREFIX=/home/spandan/GZN"
