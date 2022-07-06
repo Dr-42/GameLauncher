@@ -3,7 +3,7 @@ import tkinter as tk
 import os
 from tkinter import ttk, filedialog
 import json
-import new_game
+import pop_up
 
 # Handle cleanup
 def on_closing():
@@ -50,7 +50,7 @@ def create_ui():
     root = tk.Frame(win)
 
     head = tk.Label(root, text="Library")
-    opt = tk.Button(root, text= "≡", command=lambda: new_game.options(win, data, lb))
+    opt = tk.Button(root, text= "≡", command=lambda: pop_up.options(win, data, lb))
     head.grid(row=0, column=0, columnspan=2, sticky='w')
     opt.grid(row=0, column=2, sticky="e")
 
