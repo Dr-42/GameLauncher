@@ -10,19 +10,21 @@ def on_closing():
     win.destroy()
     win.quit()
 
+def load_data():
+    global data
+    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
+    data = json.loads(dat)
+
 # Create a button to launch the selected game
 def launch_game():
     game = lb.get(lb.curselection())
     game_path = data[game][0]
-    game_exe = data[game][1]
+    game_exe =  " \"" + data[game][1] + "\""
+    wineprefix = "WINEPREFIX=" + data[game][3]
+
     os.chdir(game_path)
 
-    if(game == "Hollow Knight"):
-        wineprefix = "WINEPREFIX=/home/spandan/HK"
-    else:
-        wineprefix = "WINEPREFIX=/home/spandan/GZN"
-
-    command = wineprefix + " prime-run wine \"" + game_exe + "\""
+    command = wineprefix + " prime-run wine"+ game_exe
     print(command)
     # Launch the game
     os.system(command)
@@ -35,7 +37,6 @@ def get_image(key):
     imgBox.image = imgN
 
 def onselect(evt):
-    # Note here that Tkinter passes an event object to onselect()
     w = evt.widget
     if w.curselection() != ():
         index = int(w.curselection()[0])
@@ -74,11 +75,6 @@ def create_ui():
     qut.grid(row=2, column=2, sticky="ew")
 
     root.pack(expand=True)
-
-def load_data():
-    global data
-    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
-    data = json.loads(dat)
  
 if __name__ == "__main__":
     load_data()
