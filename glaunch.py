@@ -13,13 +13,21 @@ def on_closing():
 
 def load_data():
     global data
-    if not os.path.isdir(os.path.expanduser('~') + "/.glaunch"):
-        os.system("mkdir $HOME/.glaunch")
-    if not os.path.isfile(os.path.expanduser('~') + "/.glaunch/data.json"):
+    root_dir = os.path.expanduser('~') + "/.glaunch/"
+    if not os.path.isdir(root_dir):
+        os.system(root_dir)
+    if not os.path.isfile(root_dir + "data.json"):
         data = {}
     else:
-        dat = open(os.path.expanduser('~') + "/.glaunch/data.json", "r").read()
+        dat = open(root_dir + "data.json", "r").read()
         data = json.loads(dat)
+
+    if not os.path.isfile(root_dir + ".runcmd"):
+        print("No runcmd file")
+        file = open(root_dir + ".runcmd", "w")
+        file.write("wine")
+
+        
 
 # Create a button to launch the selected game
 def launch_game():
@@ -30,7 +38,8 @@ def launch_game():
 
     os.chdir(game_path)
 
-    command = wineprefix + " prime-run wine"+ game_exe
+    run_cmd = " " + open(os.path.expanduser('~') + "/.glaunch/.runcmd", "r").read()
+    command = wineprefix + run_cmd + game_exe
     print(command)
     # Launch the game
     os.system(command)
