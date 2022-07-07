@@ -4,7 +4,7 @@ import os
 def set_run_command(name_field):
     file = open(os.path.expanduser('~') + "/.glaunch/.runcmd", "w")
     file.write(name_field.get("1.0", tk.END)[:-1])
-    quit_pop
+    quit_pop()
 
 def quit_pop():
     pop.destroy()
