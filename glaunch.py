@@ -13,8 +13,13 @@ def on_closing():
 
 def load_data():
     global data
-    dat = open("/run/media/spandan/Projects/Python/GameLauncher/data.json", "r").read()
-    data = json.loads(dat)
+    if not os.path.isdir(os.path.expanduser('~') + "/.glaunch"):
+        os.system("mkdir $HOME/.glaunch")
+    if not os.path.isfile(os.path.expanduser('~') + "/.glaunch/data.json"):
+        data = {}
+    else:
+        dat = open(os.path.expanduser('~') + "/.glaunch/data.json", "r").read()
+        data = json.loads(dat)
 
 # Create a button to launch the selected game
 def launch_game():

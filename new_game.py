@@ -1,24 +1,25 @@
 import tkinter as tk
+import os
 import json
 from tkinter import ttk, filedialog
 
 def open_wineprefix(dir_field):
-    dir_path_string = filedialog.askdirectory(initialdir= "/home/spandan/")
+    dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
     dir_field.delete('1.0', tk.END)
     dir_field.insert('1.0', dir_path_string)
 
 def open_game_dir(dir_field):
-    dir_path_string = filedialog.askdirectory(initialdir= "/home/spandan/.wine/drive_c")
+    dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
     dir_field.delete('1.0', tk.END)
     dir_field.insert('1.0', dir_path_string)
 
 def open_game_exe(exe_field):
-    file_path_string = filedialog.askopenfilename(initialdir= "/home/spandan/.wine/drive_c", filetypes=[('EXE', '*.exe')])
+    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('EXE', '*.exe')])
     exe_field.delete('1.0', tk.END)
     exe_field.insert('1.0', file_path_string)
 
 def open_game_image(img_field):
-    file_path_string = filedialog.askopenfilename(initialdir= "/run/media/spandan/Projects/Python/GameLauncher/images", filetypes=[('PNG', '*.png')])
+    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('PNG', '*.png')])
     img_field.delete('1.0', tk.END)
     img_field.insert('1.0', file_path_string)
 
@@ -37,7 +38,7 @@ def save_game(data, lb, name_field, dir_field, exe_field, img_field, wineprefix_
     for game in data:
         lb.insert(tk.END, game)
 
-    with open("/run/media/spandan/Projects/Python/GameLauncher/data.json", 'w') as json_file:
+    with open(os.path.expanduser('~') + "/.glaunch/data.json", 'w') as json_file:
         json.dump(data, json_file, indent=4, separators=(',',': '))
 
     quit_pop()

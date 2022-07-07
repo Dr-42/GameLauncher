@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from tkinter import ttk
 import json
 
@@ -8,7 +9,7 @@ def delete_game(data, lb):
     for game in data:
         lb.insert(tk.END, game)
 
-    with open("/run/media/spandan/Projects/Python/GameLauncher/data.json", 'w') as json_file:
+    with open(os.path.expanduser('~') + "/.glaunch/data.json", "w") as json_file:
         json.dump(data, json_file, indent=4, separators=(',',': '))
 
     quit_pop()
