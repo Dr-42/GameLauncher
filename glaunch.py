@@ -3,6 +3,7 @@ import tkinter as tk
 import os
 from tkinter import ttk, filedialog
 import json
+from PIL import Image, ImageTk
 import pop_up
 
 # Handle cleanup
@@ -32,9 +33,12 @@ def launch_game():
 def get_image(key):
     global imgN
     imgPath = data[key][2] 
-    imgN = tk.PhotoImage(file=imgPath)
-    imgBox.configure(image=imgN)
-    imgBox.image = imgN
+    imgN = Image.open(imgPath)
+    aspect = imgN.width/imgN.height
+    imgN.thumbnail((int(316 * aspect), 316), Image.Resampling.LANCZOS)
+    imgNtk = ImageTk.PhotoImage(imgN)
+    imgBox.configure(image=imgNtk)
+    imgBox.image = imgNtk
 
 def onselect(evt):
     w = evt.widget
@@ -44,7 +48,7 @@ def onselect(evt):
         get_image(value)
 
 def create_ui():
-    global win, root, img, lb, imgBox
+    global win, root, lb, imgBox
     #Create the UI
     win = tk.Tk()
     win.title("Game Launcher")
@@ -55,8 +59,7 @@ def create_ui():
     head.grid(row=0, column=0, columnspan=2, sticky='w')
     opt.grid(row=0, column=2, sticky="e")
 
-    img = tk.PhotoImage()
-    imgBox = tk.Label(root, image=img)
+    imgBox = tk.Label(root)
     imgBox.grid(row=0, column=3, rowspan=3, sticky="ewns")
 
     lb = tk.Listbox(root, selectmode=tk.SINGLE, height=9)

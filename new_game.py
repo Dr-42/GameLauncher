@@ -83,11 +83,10 @@ def options(win, data, lb):
     p_wineprefix.grid(row=4, column=0)
     p_wineprefixfield.grid(row=4, column=1, columnspan=2)
     p_wineprefixButton.grid(row=4, column=3)
-    p_saveButton.grid(row=5, column=0, columnspan=4)
-    p_img.grid(row=4, column=0)
-    p_imgfield.grid(row=4, column=1, columnspan=2)
-    p_imgButton.grid(row=4, column=3)
-    p_saveButton.grid(row=5, column=0, columnspan=4)
+    p_img.grid(row=5, column=0)
+    p_imgfield.grid(row=5, column=1, columnspan=2)
+    p_imgButton.grid(row=5, column=3)
+    p_saveButton.grid(row=6, column=0, columnspan=4)
 
     frpop.pack()
 
