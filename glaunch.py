@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Simple gui for launching games using shell commands
 import tkinter as tk
 import os
