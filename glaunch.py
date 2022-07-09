@@ -16,7 +16,7 @@ def load_data():
     global data
     root_dir = os.path.expanduser('~') + "/.glaunch/"
     if not os.path.isdir(root_dir):
-        os.system(root_dir)
+        os.system("mkdir " + root_dir)
     if not os.path.isfile(root_dir + "data.json"):
         data = {}
     else:
