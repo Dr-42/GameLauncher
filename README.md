@@ -1,6 +1,13 @@
 # GLAUNCH
 A simple GUI game launcher for wine apps
 
+# How to use
+
+1. Clone the repository.
+2. Run glaunch.py
+3. Open the top options to add or remove games
+4. Set wineprefix as [Linux Native] for running linux native games.
+
 ## Screenshots
 
 ![2022-07-07-17-37-07](https://user-images.githubusercontent.com/64161204/177770186-dc01f612-9428-4549-9024-104daedef657.png)

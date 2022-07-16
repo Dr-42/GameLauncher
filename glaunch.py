@@ -33,14 +33,21 @@ def load_data():
 # Create a button to launch the selected game
 def launch_game():
     game = lb.get(lb.curselection())
-    game_path = data[game][0]
-    game_exe =  " \"" + data[game][1] + "\""
-    wineprefix = "WINEPREFIX=" + data[game][3]
+    if(data[game][3] == "[Linux Native]"):
+        game_path = data[game][0]
+        print(game_path)
+        os.chdir(game_path)
+        command = "exec " + '\"' + data[game][1] + '\"'
+    else:
+        game_path = data[game][0]
+        game_exe =  " \"" + data[game][1] + "\""
+        wineprefix = "WINEPREFIX=" + data[game][3]
 
-    os.chdir(game_path)
+        os.chdir(game_path)
 
-    run_cmd = " " + open(os.path.expanduser('~') + "/.glaunch/.runcmd", "r").read()
-    command = wineprefix + run_cmd + game_exe
+        run_cmd = " " + open(os.path.expanduser('~') + "/.glaunch/.runcmd", "r").read()
+        command = wineprefix + run_cmd + game_exe
+
     print(command)
     # Launch the game
     os.system(command)
