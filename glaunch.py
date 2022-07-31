@@ -2,7 +2,6 @@
 # Simple gui for launching games using shell commands
 import tkinter as tk
 import os
-from tkinter import ttk, filedialog
 import json
 from PIL import Image, ImageTk
 import pop_up
@@ -16,33 +15,29 @@ def load_data():
     global data
     root_dir = os.path.expanduser('~') + "/.glaunch/"
     if not os.path.isdir(root_dir):
-        os.system("mkdir " + root_dir)
-    if not os.path.isfile(root_dir + "data.json"):
+        os.system(f"mkdir {root_dir}")
+    if not os.path.isfile(f"{root_dir}data.json"):
         data = {}
     else:
-        dat = open(root_dir + "data.json", "r").read()
+        dat = open(f"{root_dir}data.json", "r").read()
         data = json.loads(dat)
 
-    if not os.path.isfile(root_dir + ".runcmd"):
+    if not os.path.isfile(f"{root_dir}.runcmd"):
         print("No runcmd file")
-        file = open(root_dir + ".runcmd", "w")
-        file.write("wine")
-
-        
+        file = open(f"{root_dir}.runcmd", "w")
+        file.write("wine")    
 
 # Create a button to launch the selected game
 def launch_game():
     game = lb.get(lb.curselection())
-    if(data[game][3] == "[Linux Native]"):
-        game_path = data[game][0]
+    game_path = data[game][0]
+    if (data[game][3] == "[Linux Native]"):
         print(game_path)
         os.chdir(game_path)
-        command = "exec " + '\"' + data[game][1] + '\"'
+        command = f'exec \"{data[game][1]}\"'
     else:
-        game_path = data[game][0]
-        game_exe =  " \"" + data[game][1] + "\""
-        wineprefix = "WINEPREFIX=" + data[game][3]
-
+        game_exe =  f' \"{data[game][1]}\"'
+        wineprefix = f"WINEPREFIX={data[game][3]}"
         os.chdir(game_path)
 
         run_cmd = " " + open(os.path.expanduser('~') + "/.glaunch/.runcmd", "r").read()
