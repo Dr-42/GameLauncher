@@ -34,9 +34,9 @@ def launch_game():
     if (data[game][3] == "[Linux Native]"):
         print(game_path)
         os.chdir(game_path)
-        command = f'exec \"{data[game][1]}\"'
+        command = f'exec "{data[game][1]}"'
     else:
-        game_exe =  f' \"{data[game][1]}\"'
+        game_exe =  f' "{data[game][1]}"'
         wineprefix = f"WINEPREFIX={data[game][3]}"
         os.chdir(game_path)
 
