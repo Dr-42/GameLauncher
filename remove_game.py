@@ -1,6 +1,5 @@
 import tkinter as tk
 import os
-from tkinter import ttk
 import json
 
 def delete_game(data, lb):
