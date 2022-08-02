@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 import new_game, remove_game, launchcomm
 
 def open_add_game(win, data, lb):
