@@ -55,10 +55,10 @@ def options(win, data, lb):
     p_imgfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
     p_wineprefixfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
 
-    p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_dir(p_dirfield))
-    p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_exe(p_exefield))
-    p_imgButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_image(p_imgfield))
-    p_wineprefixButton = tk.Button(frpop, text="🗀 ", command=lambda: open_wineprefix(p_wineprefixfield))
+    p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_element(p_dirfield))
+    p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_element(p_exefield,[('EXE', '*.exe'), ('Linux Executable', '*')]))
+    p_imgButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_element(p_imgfield,[('PNG', '*.png')]))
+    p_wineprefixButton = tk.Button(frpop, text="🗀 ", command=lambda: open_element(p_wineprefixfield))
     p_saveButton = tk.Button(frpop, text="Save", command=lambda: save_game(data, lb, p_namefield, p_dirfield, p_exefield, p_imgfield, p_wineprefixfield))
 
     p_head.grid(row=0, column=0)
