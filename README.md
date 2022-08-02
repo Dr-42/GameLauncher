@@ -3,22 +3,22 @@ A simple GUI game launcher for wine apps
 
 # How to use
 
-1. Install the python module
-
-```pip install Pillow```
-
-2. Clone the repository
-
-```git clone https://github.com/Dr-42/GameLauncher.git```
-
+1. Install the Python module:
+```bash
+pip install Pillow
+```
+2. Clone the repository:
+```bash
+git clone https://github.com/Dr-42/GameLauncher.git
+```
 3. Change directory to the cloned repo:
-
-```cd GameLauncher```
-
-4. Run glaunch.py
- 
-```python glaunch.py```
-
+```bash
+cd GameLauncher
+```
+4. Run glaunch.py:
+```bash
+python glaunch.py
+```
 5. Open the top options to add or remove games
 6. Set wineprefix as [Linux Native] for running linux native games.
 
