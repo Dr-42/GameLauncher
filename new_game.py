@@ -3,25 +3,15 @@ import os
 import json
 from tkinter import filedialog
 
-def open_wineprefix(dir_field):
+def open_element(dir_field):
     dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
     dir_field.delete('1.0', tk.END)
     dir_field.insert('1.0', dir_path_string)
 
-def open_game_dir(dir_field):
-    dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
-    dir_field.delete('1.0', tk.END)
-    dir_field.insert('1.0', dir_path_string)
-
-def open_game_exe(exe_field):
-    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('EXE', '*.exe'), ('Linux Executable', '*')])
+def open_game_element(exe_field,type_list):
+    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=type_list)
     exe_field.delete('1.0', tk.END)
     exe_field.insert('1.0', file_path_string)
-
-def open_game_image(img_field):
-    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('PNG', '*.png')])
-    img_field.delete('1.0', tk.END)
-    img_field.insert('1.0', file_path_string)
 
 def quit_pop():
     pop.destroy()
