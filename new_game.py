@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 import json
-from tkinter import ttk, filedialog
+from tkinter import filedialog
 
 def open_wineprefix(dir_field):
     dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
