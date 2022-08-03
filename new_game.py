@@ -1,27 +1,17 @@
 import tkinter as tk
 import os
 import json
-from tkinter import ttk, filedialog
+from tkinter import filedialog
 
-def open_wineprefix(dir_field):
+def open_element(dir_field):
     dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
     dir_field.delete('1.0', tk.END)
     dir_field.insert('1.0', dir_path_string)
 
-def open_game_dir(dir_field):
-    dir_path_string = filedialog.askdirectory(initialdir= os.path.expanduser('~'))
-    dir_field.delete('1.0', tk.END)
-    dir_field.insert('1.0', dir_path_string)
-
-def open_game_exe(exe_field):
-    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('EXE', '*.exe'), ('Linux Executable', '*')])
+def open_game_element(exe_field,type_list):
+    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=type_list)
     exe_field.delete('1.0', tk.END)
     exe_field.insert('1.0', file_path_string)
-
-def open_game_image(img_field):
-    file_path_string = filedialog.askopenfilename(initialdir= os.path.expanduser('~'), filetypes=[('PNG', '*.png')])
-    img_field.delete('1.0', tk.END)
-    img_field.insert('1.0', file_path_string)
 
 def quit_pop():
     pop.destroy()
@@ -65,10 +55,10 @@ def options(win, data, lb):
     p_imgfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
     p_wineprefixfield = tk.Text(frpop, height=1, width=25, wrap="none", background="#7d807e", foreground="#000000")
 
-    p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_dir(p_dirfield))
-    p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_exe(p_exefield))
-    p_imgButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_image(p_imgfield))
-    p_wineprefixButton = tk.Button(frpop, text="🗀 ", command=lambda: open_wineprefix(p_wineprefixfield))
+    p_dirButton = tk.Button(frpop, text="🗀 ", command=lambda: open_element(p_dirfield))
+    p_exeButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_element(p_exefield,[('EXE', '*.exe'), ('Linux Executable', '*')]))
+    p_imgButton = tk.Button(frpop, text="🗀 ", command=lambda: open_game_element(p_imgfield,[('PNG', '*.png')]))
+    p_wineprefixButton = tk.Button(frpop, text="🗀 ", command=lambda: open_element(p_wineprefixfield))
     p_saveButton = tk.Button(frpop, text="Save", command=lambda: save_game(data, lb, p_namefield, p_dirfield, p_exefield, p_imgfield, p_wineprefixfield))
 
     p_head.grid(row=0, column=0)
